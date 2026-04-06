@@ -26,6 +26,7 @@
   --color-text-muted: var(--text-muted);
   --font-sans: 'Inter', sans-serif;
   --font-arabic: 'Cairo', sans-serif;
+  --animate-fade-in: fade-in 0.3s ease-out;
 }
 
 * {
@@ -120,6 +121,17 @@ body {
 .hero-slide:nth-child(2) { animation: heroSlide 15s infinite 5s; }
 .hero-slide:nth-child(3) { animation: heroSlide 15s infinite 10s; }
 
+/* Ken Burns effect for hero video */
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.ken-burns {
+  animation: kenBurns 20s ease-in-out infinite;
+}
+
 /* Floating label styles */
 .form-group {
   position: relative;
@@ -185,6 +197,61 @@ body {
 .btn-gold:hover {
   animation: shimmer 2s linear infinite;
   box-shadow: 0 4px 20px rgba(201, 169, 110, 0.4);
+}
+
+/* Form shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 50%, 90% { transform: translateX(-4px); }
+  30%, 70% { transform: translateX(4px); }
+}
+
+.form-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Float animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(-5px) translateX(-5px); }
+  75% { transform: translateY(-15px) translateX(3px); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(10px) translateX(-5px); }
+  50% { transform: translateY(5px) translateX(5px); }
+  75% { transform: translateY(15px) translateX(-3px); }
+}
+
+.float-animation {
+  animation: float 8s ease-in-out infinite;
+}
+
+.float-animation-reverse {
+  animation: float-reverse 8s ease-in-out infinite;
+}
+
+/* Marquee animation for partners */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 /* Custom scrollbar */
