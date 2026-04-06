@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const projects = [
   {
     name: "De Joya",
@@ -86,20 +88,24 @@ export default function Projects() {
               key={project.name}
               className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
             >
-              {/* Image */}
+              {/* Image with hover overlay */}
               <div className="relative h-64 overflow-hidden">
-                <img
+                <Image
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+
                 {/* Tag */}
-                <span className="absolute top-4 left-4 bg-gold/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
+                <span className="absolute top-4 left-4 bg-gold/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm z-10">
                   {project.tag}
                 </span>
+
                 {/* Location */}
-                <div className="absolute bottom-4 left-4 flex items-center gap-1.5">
+                <div className="absolute bottom-4 left-4 flex items-center gap-1.5 z-10 group-hover:opacity-0 transition-opacity duration-300">
                   <svg
                     className="w-3.5 h-3.5 text-gold"
                     fill="currentColor"
@@ -115,37 +121,58 @@ export default function Projects() {
                     {project.location}
                   </span>
                 </div>
+
+                {/* Slide-up hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/70 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-6 z-10">
+                  <p className="text-white/80 text-sm leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <svg
+                      className="w-3.5 h-3.5 text-gold"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="text-gold text-xs font-medium">
+                      {project.location}
+                    </span>
+                  </div>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide"
+                  >
+                    <span>Register Interest</span>
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
 
-              {/* Content */}
+              {/* Card body - cleaner, just name + tag */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-text-dark mb-2 group-hover:text-gold transition-colors duration-300">
+                <h3 className="text-xl font-bold text-text-dark mb-1 group-hover:text-gold transition-colors duration-300">
                   {project.name}
                 </h3>
-                <p className="text-text-muted text-sm leading-relaxed mb-5">
-                  {project.description}
+                <p className="text-text-muted text-sm">
+                  {project.location}
                 </p>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide group/btn"
-                >
-                  <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 group-hover/btn:after:w-full">
-                    Discover More
-                  </span>
-                  <svg
-                    className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </a>
               </div>
             </div>
           ))}
